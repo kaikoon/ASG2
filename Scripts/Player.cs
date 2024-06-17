@@ -19,6 +19,17 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI interactionText;
+
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    public HealthBar healthBar;
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
     private void Update()
     {
         Debug.DrawLine(playerCamera.position, playerCamera.position + (playerCamera.forward * interactionDistance), Color.red);
@@ -43,6 +54,7 @@ public class Player : MonoBehaviour
             currentInteractable = null;
             interactionText.gameObject.SetActive(false);
         }
+
     }
 
     public TextMeshProUGUI scoreText;
@@ -109,4 +121,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    void DamageTaken(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    void HealPlayer(int heal)
+    {
+        currentHealth += heal;
+        healthBar.SetHealth(currentHealth);
+    }
 }
