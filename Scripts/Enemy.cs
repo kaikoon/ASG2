@@ -18,12 +18,17 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void ShootPlayer()
+    {
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         //if bullet hits enemy take damage if health > 0 else destroy gameobject
         if(currentHealth > 0)
         {
-            maxHealth -= damage;
+            //maxHealth -= damage;
         }
         else
         {

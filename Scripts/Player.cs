@@ -120,6 +120,7 @@ public class Player : MonoBehaviour
         }
     }
 
+
     void DamageTaken(int damage)
     {
         currentHealth -= damage;
