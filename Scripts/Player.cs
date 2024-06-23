@@ -54,7 +54,6 @@ public class Player : MonoBehaviour
             currentInteractable = null;
             interactionText.gameObject.SetActive(false);
         }
-
     }
 
     public TextMeshProUGUI scoreText;
