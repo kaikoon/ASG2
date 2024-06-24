@@ -21,6 +21,7 @@ public class WeaponSystem : MonoBehaviour
         current_bullet = max_bullet;
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -33,10 +34,6 @@ public class WeaponSystem : MonoBehaviour
             current_bullet -= 1;
             cooldown = true;
             StartCoroutine(cooldown_timer());
-        }
-        if (Input.GetMouseButton(0) && current_bullet == 0)
-        {
-            OnReload();
         }
     }
     IEnumerator cooldown_timer()

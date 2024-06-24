@@ -1,8 +1,8 @@
 /*
- * Author: Elyas Chua-Aziz
- * Date: 06/05/2024
+ * Author: Lim Kai Koon
+ * Date: 30/6/24
  * Description: 
- * Contains functions related to the Player such as increasing score.
+ * 
  */
 using System.Collections;
 using System.Collections.Generic;

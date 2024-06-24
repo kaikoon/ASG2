@@ -6,16 +6,18 @@ public class Enemy : MonoBehaviour
 {
     bool lookat = false;
     public GameObject player;
-    public GameObject bullet;
+    public Collider Collider;
     Rigidbody rb;
     public float speed = 10;
     public float multiplier = 10;
     public int maxHealth = 100;
     public int currentHealth;
+    public int damage;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        currentHealth = maxHealth;
     }
 
     private void ShootPlayer()
@@ -26,16 +28,21 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //if bullet hits enemy take damage if health > 0 else destroy gameobject
-        if(currentHealth > 0)
+        if(Collider.tag == "Bullet")
         {
-            //maxHealth -= damage;
-        }
-        else
-        {
-
+            currentHealth -= damage;
+            Defeated();
+            Debug.Log("Hit");
         }
     }
 
+    private void Defeated()
+    {
+        if (currentHealth == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Update is called once per frame
     void Update()
