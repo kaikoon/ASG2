@@ -6,6 +6,9 @@ public class WeaponSystem : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject player;
+    public Camera Cam;
+    public RaycastHit RaycastHit;
+
     public float bullet_speed;
     public float fire_speed;
     public float reload_speed;
@@ -21,6 +24,13 @@ public class WeaponSystem : MonoBehaviour
         current_bullet = max_bullet;
     }
 
+    private void Shoot()
+    {
+        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out RaycastHit))
+        {
+            Debug.Log(RaycastHit.collider.name);
+        }
+    }
 
     // Update is called once per frame
     void Update()

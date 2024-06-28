@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public NavMeshAgent enemy;
+    public Transform player;
+
     bool lookat = false;
-    public GameObject player;
     public Collider Collider;
     Rigidbody rb;
     public float speed = 10;
@@ -38,7 +41,7 @@ public class Enemy : MonoBehaviour
 
     private void Defeated()
     {
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
@@ -53,12 +56,8 @@ public class Enemy : MonoBehaviour
         }
         if(lookat)
         {
+            enemy.SetDestination(player.position);
             transform.LookAt(player.transform);
-            Vector3 vel = rb.velocity;
-            if(!DetectPlayer.found && vel.x > -2 && vel.x < 2 && vel.z > -2 && vel.z < 2)
-            {
-                rb.AddForce(speed * multiplier * Time.deltaTime * transform.forward);
-            }
         }
     }
 }

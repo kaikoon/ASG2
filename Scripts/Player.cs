@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        Debug.DrawLine(playerCamera.position, playerCamera.position + (playerCamera.forward * interactionDistance), Color.red);
+        //Debug.DrawLine(playerCamera.position, playerCamera.position + (playerCamera.forward * interactionDistance), Color.red);
         RaycastHit hitInfo;
         if(Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo, interactionDistance))
         {
