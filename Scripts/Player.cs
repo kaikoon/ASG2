@@ -139,4 +139,14 @@ public class Player : MonoBehaviour
         currentHealth += heal;
         healthBar.SetHealth(currentHealth);
     }
+
+    void OnUnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    void OnLockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 }
