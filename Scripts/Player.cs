@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public int maxHealth = 100;
     public int currentHealth;
+    public int damage = 0;
+
 
     public HealthBar healthBar;
 
@@ -32,6 +34,10 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        if (currentHealth > 0)
+        {
+            DamageTaken(damage);
+        }
         //Debug.DrawLine(playerCamera.position, playerCamera.position + (playerCamera.forward * interactionDistance), Color.red);
         RaycastHit hitInfo;
         if(Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo, interactionDistance))
@@ -125,6 +131,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        damage = 0;
     }
 
     void HealPlayer(int heal)

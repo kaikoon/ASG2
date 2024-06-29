@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
-    public int damage = 5;
+    public int damage;
+    public Collider player;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.tag == "Player")
         {
-            GetComponent<Player>().DamageTaken(damage);
+            Player player = other.GetComponent<Player>();
+            Debug.Log("Player collided");
+            if (player != null )
+            {
+                player.DamageTaken(damage);
+                Debug.Log("I took damage");
+            }
         }
     }
+
 }
