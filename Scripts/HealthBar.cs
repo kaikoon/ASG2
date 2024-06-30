@@ -1,3 +1,9 @@
+/*
+ * Author: Lim Kai Koon
+ * Date: 30/6/24
+ * Description: 
+ * HealthBar UI increase/decrease
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +15,14 @@ public class HealthBar : MonoBehaviour
     public Gradient gradient;
     public Image fill;
     
+    //Set current health of player value to slider
     public void SetHealth(int health)
     {
         slider.value = health;
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
+    //Max health for player value to slider
     public void SetMaxHealth(int health)
     {
         slider.maxValue = health;

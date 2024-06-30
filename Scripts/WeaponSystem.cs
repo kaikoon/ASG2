@@ -1,3 +1,9 @@
+/*
+ * Author: Lim Kai Koon
+ * Date: 30/6/24
+ * Description: 
+ * Weapon System for blaster
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +15,7 @@ public class WeaponSystem : MonoBehaviour
     public Camera Cam;
     public RaycastHit RaycastHit;
 
+    //Variables for blaster
     public float bullet_speed;
     public float fire_speed;
     public float reload_speed;
@@ -19,11 +26,12 @@ public class WeaponSystem : MonoBehaviour
 
     private void OnReload()
     {
+        //When cooldown = true, it will take the amount of time set to reload blaster and reset currentbullet to max bullet
         cooldown = true;
         StartCoroutine(reload_timer());
         current_bullet = max_bullet;
     }
-
+    //Check what it hits
     private void Shoot()
     {
         if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out RaycastHit))
@@ -35,6 +43,7 @@ public class WeaponSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //When player left clicks, spawn bullet and reduce amount of bullets by 1 by firerate which has been set
         if(Input.GetMouseButton(0) && current_bullet > 0 && !cooldown)
         {
             GameObject bullet_clone = Instantiate(bullet, transform.position, Quaternion.identity);
@@ -46,11 +55,13 @@ public class WeaponSystem : MonoBehaviour
             StartCoroutine(cooldown_timer());
         }
     }
+    //timer for time before firing next bullet
     IEnumerator cooldown_timer()
     {
         yield return new WaitForSeconds(fire_speed);
         cooldown = false;
     }
+    //timer for time to reload
     IEnumerator reload_timer()
     {
         yield return new WaitForSeconds(reload_speed);

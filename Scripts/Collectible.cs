@@ -1,8 +1,8 @@
 /*
- * Author: Elyas Chua-Aziz
- * Date: 06/05/2024
+ * Author: Lim Kai Koon
+ * Date: 30/6/24
  * Description: 
- * The Collectible will destroy itself after being collided with.
+ * The Collectible will increase score, play an audio and destroy itself
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -13,14 +13,10 @@ public class Collectible : Interactable
     [SerializeField]
     private AudioClip collectAudio;
 
-    /// <summary>
     /// The score value that this collectible is worth.
-    /// </summary>
     public int myScore = 5;
 
-    /// <summary>
     /// Performs actions related to collection of the collectible
-    /// </summary>
     public void Collected()
     {
         AudioSource.PlayClipAtPoint(collectAudio, transform.position, 1f);

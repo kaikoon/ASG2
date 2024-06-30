@@ -2,7 +2,7 @@
  * Author: Lim Kai Koon
  * Date: 30/6/24
  * Description: 
- * 
+ * Shows player's health, maxhealth, damage and heal
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -21,21 +21,29 @@ public class Player : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI interactionText;
 
+    [SerializeField]
+    GameObject deathScreen;
+
+    //Player variables for healing and taking damage
     public int maxHealth = 100;
     public int currentHealth;
     public int damage = 0;
+    public int heal = 0;
 
-
-
+    //Get healthbar
     public HealthBar healthBar;
 
+    //Sets player's healthbar to full
     private void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
+
+
     private void Update()
     {
+        //Player will take damage unless their health drops to 0 or below
         if (currentHealth > 0)
         {
             DamageTaken(damage);
@@ -64,34 +72,24 @@ public class Player : MonoBehaviour
         }
         if (currentHealth <= 0)
         {
-            healthBar = null;
-            ResetHealth();
             Death();
         }
     }
 
     public TextMeshProUGUI scoreText;
 
-    /// <summary>
     /// The current score of the player
-    /// </summary>
     int currentScore = 0;
 
-    /// <summary>
     /// Store the current door in front of the player
-    /// </summary>
     Door currentDoor;
 
-    /// <summary>
     /// Store the current collectible that the player is touching
-    /// </summary>
     Collectible currentCollectible;
 
     Interactable currentInteractable;
 
-    /// <summary>
     /// Increases the score of the player by <paramref name="scoreToAdd"/>
-    /// </summary>
     /// <param name="scoreToAdd">The amount to increase by</param>
     public void IncreaseScore(int scoreToAdd)
     {
@@ -134,42 +132,34 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    //Deducts player health and updates the healthbar
     public void DamageTaken(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         damage = 0;
     }
-
-    void HealPlayer(int heal)
+    //Increases player health and updates healthbar
+    public void HealPlayer(int heal)
     {
         currentHealth += heal;
         healthBar.SetHealth(currentHealth);
+        heal = 0;
     }
-
+    //Player can use their cursor to interact with UI
     void OnUnlockCursor()
     {
         Cursor.lockState = CursorLockMode.None;
     }
-
+    //Player can lock cursor
     void OnLockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    void Death()
+    //Shows the death screen
+    public void Death()
     {
-        ResetHealth();
-        SceneManager.LoadScene(3);
-    }
-
-    void ResetHealth()
-    {
-        currentHealth = maxHealth;
-        HealthBar healthBar = GetComponent<HealthBar>();
-        if (healthBar != null)
-        healthBar.SetHealth(currentHealth);
+        deathScreen.SetActive(true);
     }
 
 }
