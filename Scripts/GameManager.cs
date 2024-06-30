@@ -28,8 +28,8 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + currentScore.ToString();
     }
 
-    public void KillPlayer()
+    public void Suicide()
     {
-
+        Destroy(this);
     }
 }

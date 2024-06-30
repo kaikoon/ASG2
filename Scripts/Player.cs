@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public int damage = 0;
+
 
 
     public HealthBar healthBar;
@@ -59,6 +61,12 @@ public class Player : MonoBehaviour
         {
             currentInteractable = null;
             interactionText.gameObject.SetActive(false);
+        }
+        if (currentHealth <= 0)
+        {
+            healthBar = null;
+            ResetHealth();
+            Death();
         }
     }
 
@@ -149,4 +157,19 @@ public class Player : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    void Death()
+    {
+        ResetHealth();
+        SceneManager.LoadScene(3);
+    }
+
+    void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        HealthBar healthBar = GetComponent<HealthBar>();
+        if (healthBar != null)
+        healthBar.SetHealth(currentHealth);
+    }
+
 }
